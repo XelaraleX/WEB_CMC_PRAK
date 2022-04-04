@@ -14,11 +14,14 @@ import javax.persistence.*;
 
 public class BonusProgram {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bonus_id", nullable = false)
+    private Integer id;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private Users userId;
 
-    @Id
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "airline_id", nullable = false)
     private Airlines airlineId;

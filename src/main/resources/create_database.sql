@@ -64,12 +64,12 @@ CREATE TABLE IF NOT EXISTS Tickets(
 );
 
 CREATE TABLE IF NOT EXISTS BonusProgram(
+    bonus_id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES Users ON DELETE CASCADE NOT NULL,
     airline_id INTEGER REFERENCES Airlines ON DELETE  CASCADE NOT NULL,
     bonus_card TEXT NOT NULL,
     cnt_km INTEGER CHECK ( cnt_km >= 0 ) NOT NULL,
-    cnt_use_km INTEGER CHECK ( cnt_use_km >= 0 ) NOT NULL,
-    PRIMARY KEY (user_id, airline_id)
+    cnt_use_km INTEGER CHECK ( cnt_use_km >= 0 ) NOT NULL
 );
 
 INSERT INTO Aircraft (aircraft_id, model_name)
@@ -124,9 +124,9 @@ INSERT INTO  Tickets (ticket_id, flight_id, status, user_id)
            (4, 3, 'paid', 4),
            (5, 4, 'paid', 5);
 
-INSERT INTO BonusProgram (user_id, airline_id, bonus_card, cnt_km, cnt_use_km)
-    VALUES (1, 1, '+', 123, 123),
-           (2, 2, '-', 1234, 0),
-           (3, 3, '+', 2345, 1000),
-           (4, 4, '-', 10000, 0),
-           (5, 5, '-', 0, 0);
+INSERT INTO BonusProgram (bonus_id, user_id, airline_id, bonus_card, cnt_km, cnt_use_km)
+    VALUES (1, 1, 1, '+', 123, 123),
+           (2, 2, 2, '-', 1234, 0),
+           (3, 3, 3, '+', 2345, 1000),
+           (4, 4, 4, '-', 10000, 0),
+           (5, 5, 5, '-', 0, 0);
