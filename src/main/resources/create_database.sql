@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS Aircraft CASCADE;
 DROP TABLE IF EXISTS Flights CASCADE;
 DROP TABLE IF EXISTS Airports CASCADE;
-DROP TABLE IF EXISTS AccountsLP CASCADE;
 DROP TABLE IF EXISTS Tickets CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS BonusProgram CASCADE;
@@ -26,14 +25,9 @@ CREATE TABLE IF NOT EXISTS Users(
     full_name TEXT NOT NULL,
     address TEXT,
     email TEXT NOT NULL,
-    phone_number TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS AccountsLP(
-    user_id INTEGER REFERENCES Users ON DELETE CASCADE NOT NULL,
+    phone_number TEXT NOT NULL,
     user_login TEXT NOT NULL,
-    user_password TEXT NOT NULL,
-    PRIMARY KEY (user_id)
+    user_password TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Airlines(
@@ -86,19 +80,12 @@ VALUES (1, 'Domodedovo International Airport', 37.9062995910644531, 55.408798217
        (4, 'Tolmachevo Airport', 82.6507034301759944, 55.012599945067997, 'Asia/Novosibirsk'),
        (5, 'Kazan International Airport', 49.278701782227003, 55.606201171875, 'Europe/Moscow');
 
-INSERT INTO Users (user_id, user_status, full_name, address, email, phone_number)
-VALUES (1, 'admin', 'admin', NULL, 'admin@m.ru', '+77777777'),
-       (2, 'user', 'Ivanov Mikhail', NULL, 'mikhail@m.ru', '+77777778'),
-       (3, 'user', 'Stepanov Alexey', NULL, 'alexey@m.ru', '+77777779'),
-       (4, 'user', 'Petrov Vladimir', NULL, 'vladimir@m.ru', '+77777738'),
-       (5, 'user', 'Ignatov Daniil', NULL, 'daniil@m.ru', '+77777798');
-
-INSERT INTO AccountsLP (user_id, user_login, user_password)
-VALUES (1, 'alexander', 'ZZ62ph0a7p'),
-       (2, 'mikhail', 'ljIr0rcDRe'),
-       (3, 'alexey', 'sH8a93HMNl'),
-       (4, 'vladimir', 'aUylpdbBr0'),
-       (5, 'danya', 'W0u9zYqcjn');
+INSERT INTO Users (user_id, user_status, full_name, address, email, phone_number, user_login, user_password)
+VALUES (1, 'admin', 'admin', NULL, 'admin@m.ru', '+77777777', 'alexander', 'ZZ62ph0a7p'),
+       (2, 'user', 'Ivanov Mikhail', NULL, 'mikhail@m.ru', '+77777778', 'mikhail', 'ljIr0rcDRe'),
+       (3, 'user', 'Stepanov Alexey', NULL, 'alexey@m.ru', '+77777779', 'alexey', 'sH8a93HMNl'),
+       (4, 'user', 'Petrov Vladimir', NULL, 'vladimir@m.ru', '+77777738', 'vladimir', 'aUylpdbBr0'),
+       (5, 'user', 'Ignatov Daniil', NULL, 'daniil@m.ru', '+77777798', 'danya', 'W0u9zYqcjn');
 
 INSERT INTO Airlines (airline_id, airline_name, airline_email, phone_number)
 VALUES (1, 'Aeroflot', NULL, '88004445555'),

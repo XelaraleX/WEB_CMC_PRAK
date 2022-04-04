@@ -37,4 +37,12 @@ public class Users {
     @Lob
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+
+    @Lob
+    @Column(name = "user_login", nullable = false)
+    private String userLogin;
+
+    @Lob
+    @Column(name = "user_password", nullable = false)
+    private String userPassword;
 }
