@@ -1,4 +1,4 @@
-package ru.msu.cmc.webprak.models;
+package ru.msu.cmc.webprak.model.entity;
 
 import lombok.*;
 
@@ -20,5 +20,5 @@ public class Aircraft {
 
     @Lob
     @Column(name = "model_name", nullable = false)
-    private String clientName;
+    private String modelName;
 }

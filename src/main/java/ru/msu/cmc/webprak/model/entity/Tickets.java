@@ -1,4 +1,4 @@
-package ru.msu.cmc.webprak.models;
+package ru.msu.cmc.webprak.model.entity;
 
 import lombok.*;
 

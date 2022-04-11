@@ -1,6 +1,9 @@
-package ru.msu.cmc.webprak.models;
+package ru.msu.cmc.webprak.model.entity;
 
 import lombok.*;
+import ru.msu.cmc.webprak.model.entity.Aircraft;
+import ru.msu.cmc.webprak.model.entity.Airlines;
+import ru.msu.cmc.webprak.model.entity.Airports;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
