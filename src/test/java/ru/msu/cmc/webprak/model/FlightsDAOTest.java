@@ -3,8 +3,14 @@ package ru.msu.cmc.webprak.model;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.msu.cmc.webprak.model.dao.*;
-import ru.msu.cmc.webprak.model.entity.*;
+import ru.msu.cmc.webprak.model.dao.AircraftDAO;
+import ru.msu.cmc.webprak.model.dao.AirlinesDAO;
+import ru.msu.cmc.webprak.model.dao.AirportsDAO;
+import ru.msu.cmc.webprak.model.dao.FlightsDAO;
+import ru.msu.cmc.webprak.model.entity.Aircraft;
+import ru.msu.cmc.webprak.model.entity.Airlines;
+import ru.msu.cmc.webprak.model.entity.Airports;
+import ru.msu.cmc.webprak.model.entity.Flights;
 
 import java.time.LocalDateTime;
 import java.util.*;
