@@ -36,11 +36,11 @@ public class AirportsDAOImpl extends BaseDAOImpl<Airports> implements AirportsDA
             predicates.add(builder.like(root.get("airportName"), pattern));
         }
         if (filter.getWidth() != null) {
-            Float width = filter.getWidth();
+            Double width = filter.getWidth();
             predicates.add(builder.ge(root.get("width"), builder.literal(width)));
         }
         if (filter.getLongitude() != null) {
-            Float longitude = filter.getLongitude();
+            Double longitude = filter.getLongitude();
             predicates.add(builder.ge(root.get("longitude"), builder.literal(longitude)));
         }
         if (filter.getTimezone() != null) {

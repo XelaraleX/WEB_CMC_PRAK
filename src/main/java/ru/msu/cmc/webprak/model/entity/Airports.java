@@ -24,11 +24,11 @@ public class Airports {
 
     @Lob
     @Column(name = "width", nullable = false)
-    private Float width;
+    private Double width;
 
     @Lob
     @Column(name = "longitude", nullable = false)
-    private Float longitude;
+    private Double longitude;
 
     @Lob
     @Column(name = "timezone", nullable = false)

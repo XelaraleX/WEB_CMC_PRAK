@@ -11,8 +11,8 @@ public interface AirportsDAO extends BaseDAO<Airports> {
     @Getter
     class Filter {
         private String airportName;
-        private Float width;
-        private Float longitude;
+        private Double width;
+        private Double longitude;
         private String timezone;
     }
 

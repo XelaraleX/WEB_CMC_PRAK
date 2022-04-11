@@ -76,7 +76,7 @@ public class AirlinesDAOTest {
 
     @Test
     public void testGetByEmail() {
-        Collection<Airlines> allTestNames = this.dao.getAirlinesByFilter(
+        Collection<Airlines> allTestEmails = this.dao.getAirlinesByFilter(
                 AirlinesDAO.getFilterBuilder()
                         .airlineEmail(this.runId)
                         .build()
@@ -86,7 +86,7 @@ public class AirlinesDAOTest {
         expected.add(this.airlinesTest1);
         expected.add(this.airlinesTest2);
 
-        Set<Airlines> got = new HashSet<>(allTestNames);
+        Set<Airlines> got = new HashSet<>(allTestEmails);
 
         assertEquals(expected, got);
 
@@ -106,7 +106,7 @@ public class AirlinesDAOTest {
 
     @Test
     public void testGetByPhoneNumber() {
-        Collection<Airlines> allTestNames = this.dao.getAirlinesByFilter(
+        Collection<Airlines> allTestNumbers = this.dao.getAirlinesByFilter(
                 AirlinesDAO.getFilterBuilder()
                         .phoneNumber(this.runId)
                         .build()
@@ -116,7 +116,7 @@ public class AirlinesDAOTest {
         expected.add(this.airlinesTest1);
         expected.add(this.airlinesTest2);
 
-        Set<Airlines> got = new HashSet<>(allTestNames);
+        Set<Airlines> got = new HashSet<>(allTestNumbers);
 
         assertEquals(expected, got);
 
