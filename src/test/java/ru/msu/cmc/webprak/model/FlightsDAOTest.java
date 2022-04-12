@@ -53,8 +53,8 @@ public class FlightsDAOTest {
         this.flights1.setAirportIdDep(airports1);
         this.flights1.setAirportIdArr(airports1);
         this.flights1.setAircraftId(aircraft1);
-        this.flights1.setTimeDep(LocalDateTime.parse("2022-04-12 00:01:01+03"));
-        this.flights1.setTimeArr(LocalDateTime.parse("2022-04-12 00:02:01+03"));
+        this.flights1.setTimeDep("2022-04-12 00:01:01+03");
+        this.flights1.setTimeArr("2022-04-12 00:02:01+03");
         this.flights1.setFlightCost(1);
         this.flights1.setCntSeats(1);
         this.flights1.setCntAvailableSeats(1);
@@ -79,8 +79,8 @@ public class FlightsDAOTest {
         this.flights2.setAirportIdDep(airports2);
         this.flights2.setAirportIdArr(airports2);
         this.flights2.setAircraftId(aircraft2);
-        this.flights2.setTimeDep(LocalDateTime.parse("2022-04-12 00:01:02+03"));
-        this.flights2.setTimeArr(LocalDateTime.parse("2022-04-12 00:02:02+03"));
+        this.flights2.setTimeDep("2022-04-12 00:01:02+03");
+        this.flights2.setTimeArr("2022-04-12 00:02:02+03");
         this.flights2.setFlightCost(2);
         this.flights2.setCntSeats(2);
         this.flights2.setCntAvailableSeats(2);
@@ -134,7 +134,7 @@ public class FlightsDAOTest {
     public void testGetByTimeDep() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeDep(LocalDateTime.parse("2022-04-12 00:01:02+03"))
+                        .timeDep("2022-04-12 00:01:02+03")
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -147,7 +147,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeDep(LocalDateTime.parse("2022-04-12 00:01:01+03"))
+                        .timeDep("2022-04-12 00:01:01+03")
                         .build()
         );
 
@@ -163,7 +163,7 @@ public class FlightsDAOTest {
     public void testGetByTimeArr() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeArr(LocalDateTime.parse("2022-04-12 00:02:02+03"))
+                        .timeArr("2022-04-12 00:02:02+03")
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -176,7 +176,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeArr(LocalDateTime.parse("2022-04-12 00:02:01+03"))
+                        .timeArr("2022-04-12 00:02:01+03")
                         .build()
         );
 

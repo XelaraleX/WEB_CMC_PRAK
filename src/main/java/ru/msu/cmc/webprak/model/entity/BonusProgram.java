@@ -49,13 +49,13 @@ public class BonusProgram {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof BonusProgram)) return false;
         BonusProgram that = (BonusProgram) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(userId, that.userId) && Objects.equals(airlineId, that.airlineId) && Objects.equals(bonusCard, that.bonusCard) && Objects.equals(cntKm, that.cntKm) && Objects.equals(cntUseKm, that.cntUseKm);
+        return getId().equals(that.getId()) && getUserId().equals(that.getUserId()) && getAirlineId().equals(that.getAirlineId()) && getBonusCard().equals(that.getBonusCard()) && getCntKm().equals(that.getCntKm()) && getCntUseKm().equals(that.getCntUseKm());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), userId, airlineId, bonusCard, cntKm, cntUseKm);
+        return Objects.hash(getId(), getUserId(), getAirlineId(), getBonusCard(), getCntKm(), getCntUseKm());
     }
 }

@@ -42,13 +42,13 @@ public class Airlines {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Airlines)) return false;
         Airlines airlines = (Airlines) o;
-        return Objects.equals(id, airlines.id) && Objects.equals(airlineName, airlines.airlineName) && Objects.equals(airlineEmail, airlines.airlineEmail) && Objects.equals(phoneNumber, airlines.phoneNumber);
+        return getId().equals(airlines.getId()) && getAirlineName().equals(airlines.getAirlineName()) && getAirlineEmail().equals(airlines.getAirlineEmail()) && getPhoneNumber().equals(airlines.getPhoneNumber());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, airlineName, airlineEmail, phoneNumber);
+        return Objects.hash(getId(), getAirlineName(), getAirlineEmail(), getPhoneNumber());
     }
 }

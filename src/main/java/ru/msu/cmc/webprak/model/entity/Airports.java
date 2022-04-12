@@ -46,13 +46,13 @@ public class Airports {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Airports)) return false;
         Airports airports = (Airports) o;
-        return Objects.equals(getId(), airports.getId()) && Objects.equals(airportName, airports.airportName) && Objects.equals(width, airports.width) && Objects.equals(longitude, airports.longitude) && Objects.equals(timezone, airports.timezone);
+        return getId().equals(airports.getId()) && getAirportName().equals(airports.getAirportName()) && getWidth().equals(airports.getWidth()) && getLongitude().equals(airports.getLongitude()) && getTimezone().equals(airports.getTimezone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), airportName, width, longitude, timezone);
+        return Objects.hash(getId(), getAirportName(), getWidth(), getLongitude(), getTimezone());
     }
 }

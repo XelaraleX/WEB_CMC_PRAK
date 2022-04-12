@@ -51,8 +51,8 @@ public class TicketsDAOTest {
         this.flights1.setAirportIdDep(airports1);
         this.flights1.setAirportIdArr(airports1);
         this.flights1.setAircraftId(aircraft1);
-        this.flights1.setTimeDep(LocalDateTime.parse("2022-04-12 00:01:01+03"));
-        this.flights1.setTimeArr(LocalDateTime.parse("2022-04-12 00:02:01+03"));
+        this.flights1.setTimeDep("2022-04-12 00:01:01+03");
+        this.flights1.setTimeArr("2022-04-12 00:02:01+03");
         this.flights1.setFlightCost(1);
         this.flights1.setCntSeats(1);
         this.flights1.setCntAvailableSeats(1);
@@ -91,8 +91,8 @@ public class TicketsDAOTest {
         this.flights2.setAirportIdDep(airports2);
         this.flights2.setAirportIdArr(airports2);
         this.flights2.setAircraftId(aircraft2);
-        this.flights2.setTimeDep(LocalDateTime.parse("2022-04-12 00:01:02+03"));
-        this.flights2.setTimeArr(LocalDateTime.parse("2022-04-12 00:02:02+03"));
+        this.flights2.setTimeDep("2022-04-12 00:01:02+03");
+        this.flights2.setTimeArr("2022-04-12 00:02:02+03");
         this.flights2.setFlightCost(2);
         this.flights2.setCntSeats(2);
         this.flights2.setCntAvailableSeats(2);

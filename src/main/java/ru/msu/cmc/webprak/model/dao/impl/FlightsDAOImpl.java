@@ -33,14 +33,12 @@ public class FlightsDAOImpl extends BaseDAOImpl<Flights> implements FlightsDAO {
 
         List<Predicate> predicates = new ArrayList<>();
         if (filter.getTimeDep() != null) {
-            LocalDateTime pattern = LocalDateTime.parse("%" + filter.getTimeDep() + "%");
-            predicates.add(builder.or(builder.isNull(root.get("timeDep")),
-                    builder.lessThanOrEqualTo(root.get("timeDep").as(LocalDateTime.class), pattern)));
+            String pattern = "%" + filter.getTimeDep() + "%";
+            predicates.add(builder.like(root.get("timeDep"), pattern));
         }
         if (filter.getTimeArr() != null) {
-            LocalDateTime pattern = LocalDateTime.parse("%" + filter.getTimeArr() + "%");
-            predicates.add(builder.or(builder.isNull(root.get("timeArr")),
-                    builder.lessThanOrEqualTo(root.get("timeArr").as(LocalDateTime.class), pattern)));
+            String pattern = "%" + filter.getTimeArr() + "%";
+            predicates.add(builder.like(root.get("timeArr"), pattern));
         }
         if (filter.getFlightCost() != null) {
             Integer flightCost = filter.getFlightCost();

@@ -33,9 +33,9 @@ public class Aircraft {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Aircraft)) return false;
         Aircraft aircraft = (Aircraft) o;
-        return getId().equals(aircraft.getId()) && Objects.equals(getModelName(), aircraft.getModelName());
+        return getId().equals(aircraft.getId()) && getModelName().equals(aircraft.getModelName());
     }
 
     @Override

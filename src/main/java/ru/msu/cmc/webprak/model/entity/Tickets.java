@@ -41,13 +41,13 @@ public class Tickets {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Tickets)) return false;
         Tickets tickets = (Tickets) o;
-        return Objects.equals(getId(), tickets.getId()) && Objects.equals(flightId, tickets.flightId) && Objects.equals(status, tickets.status) && Objects.equals(userId, tickets.userId);
+        return getId().equals(tickets.getId()) && getFlightId().equals(tickets.getFlightId()) && getStatus().equals(tickets.getStatus()) && getUserId().equals(tickets.getUserId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), flightId, status, userId);
+        return Objects.hash(getId(), getFlightId(), getStatus(), getUserId());
     }
 }

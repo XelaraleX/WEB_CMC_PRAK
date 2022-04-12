@@ -11,8 +11,8 @@ public interface FlightsDAO extends BaseDAO<Flights> {
     @Builder
     @Getter
     class Filter {
-        private LocalDateTime timeDep;
-        private LocalDateTime timeArr;
+        private String timeDep;
+        private String timeArr;
         private Integer flightCost;
         private Integer cntSeats;
         private Integer cntAvailableSeats;

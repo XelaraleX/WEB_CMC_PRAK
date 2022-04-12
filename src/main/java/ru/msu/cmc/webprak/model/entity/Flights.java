@@ -47,11 +47,13 @@ public class Flights {
 
     @Lob
     @Column(name = "time_dep", nullable = false)
-    private LocalDateTime timeDep;
+    @Type(type = "org.hibernate.type.TextType")
+    private String timeDep;
 
     @Lob
     @Column(name = "time_arr", nullable = false)
-    private LocalDateTime timeArr;
+    @Type(type = "org.hibernate.type.TextType")
+    private String timeArr;
 
     @Lob
     @Column(name = "flight_cost", nullable = false)
@@ -68,13 +70,13 @@ public class Flights {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Flights)) return false;
         Flights flights = (Flights) o;
-        return Objects.equals(getId(), flights.getId()) && Objects.equals(airlineId, flights.airlineId) && Objects.equals(airportIdDep, flights.airportIdDep) && Objects.equals(airportIdArr, flights.airportIdArr) && Objects.equals(aircraftId, flights.aircraftId) && Objects.equals(timeDep, flights.timeDep) && Objects.equals(timeArr, flights.timeArr) && Objects.equals(flightCost, flights.flightCost) && Objects.equals(cntSeats, flights.cntSeats) && Objects.equals(cntAvailableSeats, flights.cntAvailableSeats);
+        return getId().equals(flights.getId()) && getAirlineId().equals(flights.getAirlineId()) && getAirportIdDep().equals(flights.getAirportIdDep()) && getAirportIdArr().equals(flights.getAirportIdArr()) && getAircraftId().equals(flights.getAircraftId()) && getTimeDep().equals(flights.getTimeDep()) && getTimeArr().equals(flights.getTimeArr()) && getFlightCost().equals(flights.getFlightCost()) && getCntSeats().equals(flights.getCntSeats()) && getCntAvailableSeats().equals(flights.getCntAvailableSeats());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), airlineId, airportIdDep, airportIdArr, aircraftId, timeDep, timeArr, flightCost, cntSeats, cntAvailableSeats);
+        return Objects.hash(getId(), getAirlineId(), getAirportIdDep(), getAirportIdArr(), getAircraftId(), getTimeDep(), getTimeArr(), getFlightCost(), getCntSeats(), getCntAvailableSeats());
     }
 }

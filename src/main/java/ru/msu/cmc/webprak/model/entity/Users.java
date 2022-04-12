@@ -62,13 +62,13 @@ public class Users {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Users)) return false;
         Users users = (Users) o;
-        return Objects.equals(getId(), users.getId()) && Objects.equals(userStatus, users.userStatus) && Objects.equals(fullName, users.fullName) && Objects.equals(address, users.address) && Objects.equals(email, users.email) && Objects.equals(phoneNumber, users.phoneNumber) && Objects.equals(userLogin, users.userLogin) && Objects.equals(userPassword, users.userPassword);
+        return getId().equals(users.getId()) && getUserStatus().equals(users.getUserStatus()) && getFullName().equals(users.getFullName()) && getAddress().equals(users.getAddress()) && getEmail().equals(users.getEmail()) && getPhoneNumber().equals(users.getPhoneNumber()) && getUserLogin().equals(users.getUserLogin()) && getUserPassword().equals(users.getUserPassword());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), userStatus, fullName, address, email, phoneNumber, userLogin, userPassword);
+        return Objects.hash(getId(), getUserStatus(), getFullName(), getAddress(), getEmail(), getPhoneNumber(), getUserLogin(), getUserPassword());
     }
 }
