@@ -27,10 +27,12 @@ public class BonusProgram {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
     private Users userId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
+    @ToString.Exclude
     private Airlines airlineId;
 
     @Lob
@@ -38,11 +40,9 @@ public class BonusProgram {
     @Type(type = "org.hibernate.type.TextType")
     private String bonusCard;
 
-    @Lob
     @Column(name = "cnt_km", nullable = false)
     private Integer cntKm;
 
-    @Lob
     @Column(name = "cnt_use_km", nullable = false)
     private Integer cntUseKm;
 

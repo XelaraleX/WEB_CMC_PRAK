@@ -5,13 +5,13 @@ import org.hibernate.Session;
 import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.FlightsDAO;
 import ru.msu.cmc.webprak.model.entity.Flights;
+import ru.msu.cmc.webprak.utils.TimeConvertUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,26 +32,50 @@ public class FlightsDAOImpl extends BaseDAOImpl<Flights> implements FlightsDAO {
         Root<Flights> root = criteriaQuery.from(Flights.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        if (filter.getTimeDep() != null) {
-            String pattern = "%" + filter.getTimeDep() + "%";
-            predicates.add(builder.like(root.get("timeDep"), pattern));
+
+        if (filter.getTimeDepMin() != null) {
+            String str = filter.getTimeDepMin();
+            predicates.add(builder.lessThan(root.get("timeDep"), TimeConvertUtil.fromString(str)));
         }
-        if (filter.getTimeArr() != null) {
-            String pattern = "%" + filter.getTimeArr() + "%";
-            predicates.add(builder.like(root.get("timeArr"), pattern));
+        if (filter.getTimeDepMax() != null) {
+            String str = filter.getTimeDepMax();
+            predicates.add(builder.greaterThan(root.get("timeDep"), TimeConvertUtil.fromString(str)));
         }
-        if (filter.getFlightCost() != null) {
-            Integer flightCost = filter.getFlightCost();
-            predicates.add(builder.ge(root.get("flightCost"), builder.literal(flightCost)));
+        if (filter.getTimeArrMin() != null) {
+            String str = filter.getTimeArrMin();
+            predicates.add(builder.lessThan(root.get("timeArr"), TimeConvertUtil.fromString(str)));
         }
-        if (filter.getCntSeats() != null) {
-            Integer cntSeats = filter.getCntSeats();
-            predicates.add(builder.ge(root.get("cntSeats"), builder.literal(cntSeats)));
+        if (filter.getTimeArrMax() != null) {
+            String str = filter.getTimeArrMax();
+            predicates.add(builder.greaterThan(root.get("timeArr"), TimeConvertUtil.fromString(str)));
         }
-        if (filter.getCntAvailableSeats() != null) {
-            Integer cntAvailableSeats = filter.getCntAvailableSeats();
-            predicates.add(builder.ge(root.get("cntAvailableSeats"), builder.literal(cntAvailableSeats)));
+        if (filter.getFlightCostMin() != null) {
+            Integer flightCostMin = filter.getFlightCostMin();
+            predicates.add(builder.le(builder.literal(flightCostMin), root.get("flightCost")));
         }
+        if (filter.getFlightCostMax() != null) {
+            Integer flightCostMax = filter.getFlightCostMax();
+            predicates.add(builder.ge(builder.literal(flightCostMax), root.get("flightCost")));
+        }
+        if (filter.getCntSeatsMin() != null) {
+            Integer cntSeatsMin = filter.getCntSeatsMin();
+            predicates.add(builder.le(builder.literal(cntSeatsMin), root.get("cntSeats")));
+        }
+        if (filter.getCntSeatsMax() != null) {
+            Integer cntSeatsMax = filter.getCntSeatsMax();
+            predicates.add(builder.ge(builder.literal(cntSeatsMax), root.get("cntSeats")));
+        }
+        if (filter.getCntAvailableSeatsMin() != null) {
+            Integer cntAvailableSeatsMin = filter.getCntAvailableSeatsMin();
+            predicates.add(builder.le(builder.literal(cntAvailableSeatsMin), root.get("cntAvailableSeats")));
+        }
+        if (filter.getCntAvailableSeatsMax() != null) {
+            Integer cntAvailableSeatsMax = filter.getCntAvailableSeatsMax();
+            predicates.add(builder.ge(builder.literal(cntAvailableSeatsMax), root.get("cntAvailableSeats")));
+        }
+
+        if (predicates.size() != 0)
+            criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
         List<Flights> result = session.createQuery(criteriaQuery).getResultList();
         session.getTransaction().commit();

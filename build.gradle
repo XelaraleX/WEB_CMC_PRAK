@@ -63,7 +63,7 @@ dependencies {
 	annotationProcessor 'com.fasterxml.jackson.core:jackson-databind'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'com.bazarnazar:pgjson:1.3'
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
 }
 
 tasks.named('test') {

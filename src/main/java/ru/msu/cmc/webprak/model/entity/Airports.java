@@ -31,28 +31,20 @@ public class Airports {
     private String airportName;
 
     @Lob
-    @Column(name = "width", nullable = false)
-    private Double width;
-
-    @Lob
-    @Column(name = "longitude", nullable = false)
-    private Double longitude;
-
-    @Lob
-    @Column(name = "timezone", nullable = false)
+    @Column(name = "airport_town", nullable = false)
     @Type(type = "org.hibernate.type.TextType")
-    private String timezone;
+    private String airportTown;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Airports)) return false;
         Airports airports = (Airports) o;
-        return getId().equals(airports.getId()) && getAirportName().equals(airports.getAirportName()) && getWidth().equals(airports.getWidth()) && getLongitude().equals(airports.getLongitude()) && getTimezone().equals(airports.getTimezone());
+        return getId().equals(airports.getId()) && getAirportName().equals(airports.getAirportName()) && getAirportTown().equals(airports.getAirportTown());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getAirportName(), getWidth(), getLongitude(), getTimezone());
+        return Objects.hash(getId(), getAirportName(), getAirportTown());
     }
 }

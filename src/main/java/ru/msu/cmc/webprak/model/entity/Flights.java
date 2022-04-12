@@ -31,39 +31,38 @@ public class Flights {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
+    @ToString.Exclude
     private Airlines airlineId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airport_id_dep", nullable = false)
+    @ToString.Exclude
     private Airports airportIdDep;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airport_id_arr", nullable = false)
+    @ToString.Exclude
     private Airports airportIdArr;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "aircraft_id", nullable = false)
+    @ToString.Exclude
     private Aircraft aircraftId;
 
     @Lob
     @Column(name = "time_dep", nullable = false)
-    @Type(type = "org.hibernate.type.TextType")
-    private String timeDep;
+    private LocalDateTime timeDep;
 
     @Lob
     @Column(name = "time_arr", nullable = false)
-    @Type(type = "org.hibernate.type.TextType")
-    private String timeArr;
+    private LocalDateTime timeArr;
 
-    @Lob
     @Column(name = "flight_cost", nullable = false)
     private Integer flightCost;
 
-    @Lob
     @Column(name = "cnt_seats", nullable = false)
     private Integer cntSeats;
 
-    @Lob
     @Column(name = "cnt_available_seats", nullable = false)
     private Integer cntAvailableSeats;
 

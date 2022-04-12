@@ -14,9 +14,7 @@ CREATE TABLE IF NOT EXISTS Aircraft(
 CREATE TABLE IF NOT EXISTS Airports(
     airport_id SERIAL PRIMARY KEY,
     airport_name TEXT NOT NULL,
-    width REAL NOT NULL,
-    longitude REAL NOT NULL,
-    timezone TEXT NOT NULL
+    airport_town TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Users(
@@ -43,8 +41,8 @@ CREATE TABLE IF NOT EXISTS Flights(
     airport_id_dep INTEGER REFERENCES Airports ON DELETE CASCADE NOT NULL,
     airport_id_arr INTEGER REFERENCES Airports ON DELETE CASCADE NOT NULL,
     aircraft_id INTEGER REFERENCES Aircraft ON DELETE CASCADE NOT NULL,
-    time_dep TIMESTAMP WITH TIME ZONE NOT NULL,
-    time_arr TIMESTAMP WITH TIME ZONE NOT NULL,
+    time_dep TIMESTAMP NOT NULL ,
+    time_arr TIMESTAMP NOT NULL,
     flight_cost INTEGER CHECK ( flight_cost > 0 ) NOT NULL,
     cnt_seats INTEGER CHECK ( cnt_seats > 0 ) NOT NULL,
     cnt_available_seats INTEGER CHECK ( cnt_available_seats >= 0 ) NOT NULL
@@ -73,12 +71,12 @@ INSERT INTO Aircraft (aircraft_id, model_name)
            (4, 'Airbus A320-200'),
            (5, 'Boeing 737-300');
 
-INSERT INTO Airports (airport_id, airport_name, width, longitude, timezone)
-VALUES (1, 'Domodedovo International Airport', 37.9062995910644531, 55.4087982177734375, 'Europe/Moscow'),
-       (2, 'Bratsk Airport', 101.697998046875, 56.3706016540527344, 'Asia/Irkutsk'),
-       (3, 'Pulkovo Airport', 30.2625007629394531, 59.8003005981445312, 'Europe/Moscow'),
-       (4, 'Tolmachevo Airport', 82.6507034301759944, 55.012599945067997, 'Asia/Novosibirsk'),
-       (5, 'Kazan International Airport', 49.278701782227003, 55.606201171875, 'Europe/Moscow');
+INSERT INTO Airports (airport_id, airport_name, airport_town)
+VALUES (1, 'Domodedovo International Airport', 'Moscow'),
+       (2, 'Bratsk Airport', 'Bratsk'),
+       (3, 'Pulkovo Airport', 'Saint Petersburg'),
+       (4, 'Tolmachevo Airport', 'Novosibirsk'),
+       (5, 'Kazan International Airport', 'Kazan');
 
 INSERT INTO Users (user_id, user_status, full_name, address, email, phone_number, user_login, user_password)
 VALUES (1, 'admin', 'admin', NULL, 'admin@m.ru', '+77777777', 'alexander', 'ZZ62ph0a7p'),
@@ -97,11 +95,11 @@ VALUES (1, 'Aeroflot', NULL, '88004445555'),
 INSERT INTO Flights (flight_id, airline_id, airport_id_dep, airport_id_arr,
                      aircraft_id, time_dep, time_arr, flight_cost, cnt_seats,
                      cnt_available_seats)
-    VALUES (1, 1, 1, 2, 1, '2022-03-10 09:50:00+03', '2022-03-10 14:55:00+03', 13000, 550, 0),
-           (2, 2, 2, 1, 2, '2022-03-11 09:50:00+03', '2022-03-11 14:45:00+03', 16000, 375, 0),
-           (3, 3, 1, 3, 3, '2022-03-15 09:35:00+03', '2022-03-15 10:30:00+03', 4000, 103, 0),
-           (4, 4, 1, 4, 4, '2022-04-01 11:05:00+03', '2022-04-01 14:30:00+03', 9000, 180, 21),
-           (5, 5, 1, 5, 5, '2022-05-01 10:40:00+03', '2017-05-01 11:35:00+03', 5000, 189, 189);
+    VALUES (1, 1, 1, 2, 1, '2022-03-10 09:50:00+03', '2022-03-10 14:55:00', 13000, 550, 0),
+           (2, 2, 2, 1, 2, '2022-03-11 09:50:00+03', '2022-03-11 14:45:00', 16000, 375, 0),
+           (3, 3, 1, 3, 3, '2022-03-15 09:35:00+03', '2022-03-15 10:30:00', 4000, 103, 0),
+           (4, 4, 1, 4, 4, '2022-04-01 11:05:00+03', '2022-04-01 14:30:00', 9000, 180, 21),
+           (5, 5, 1, 5, 5, '2022-05-01 10:40:00+03', '2017-05-01 11:35:00', 5000, 189, 189);
 
 
 INSERT INTO  Tickets (ticket_id, flight_id, status, user_id)

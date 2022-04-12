@@ -38,14 +38,14 @@ public class UsersDAOTest {
         this.usersTest2.setUserLogin("TestLogin2" + this.runId);
         this.usersTest2.setUserPassword("TestPassword2" + this.runId);
 
-        this.dao.add(usersTest1);
-        this.dao.add(usersTest2);
+        this.dao.add(this.usersTest1);
+        this.dao.add(this.usersTest2);
     }
 
     @AfterEach
     public void cleanUp() {
-        this.dao.delete(usersTest1);
-        this.dao.delete(usersTest2);
+        this.dao.delete(this.usersTest1);
+        this.dao.delete(this.usersTest2);
 
         this.dao = null;
         this.runId = null;
@@ -215,7 +215,7 @@ public class UsersDAOTest {
 
         Collection<Users> onlyTest1 = this.dao.getUsersByFilter(
                 UsersDAO.getFilterBuilder()
-                        .userLogin("TestLogin1" + this.runId)
+                        .userLogin("TestLogin1")
                         .build()
         );
 
@@ -244,7 +244,7 @@ public class UsersDAOTest {
 
         Collection<Users> onlyTest1 = this.dao.getUsersByFilter(
                 UsersDAO.getFilterBuilder()
-                        .userPassword("TestPassword1" + this.runId)
+                        .userPassword("TestPassword1")
                         .build()
         );
 

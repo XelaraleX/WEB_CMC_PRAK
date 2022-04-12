@@ -11,8 +11,10 @@ public interface BonusProgramDAO extends BaseDAO<BonusProgram> {
     @Getter
     class Filter {
         private String bonusCard;
-        private Integer cntKm;
-        private Integer cntUseKm;
+        private Integer cntKmMin;
+        private Integer cntKmMax;
+        private Integer cntUseKmMin;
+        private Integer cntUseKmMax;
     }
 
     static Filter.FilterBuilder getFilterBuilder() {

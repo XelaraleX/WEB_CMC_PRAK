@@ -36,8 +36,8 @@ public class AirlinesDAOTest {
 
     @AfterEach
     public void cleanUp() {
-        this.dao.delete(airlinesTest1);
-        this.dao.delete(airlinesTest2);
+        this.dao.delete(this.airlinesTest1);
+        this.dao.delete(this.airlinesTest2);
 
         this.dao = null;
         this.runId = null;

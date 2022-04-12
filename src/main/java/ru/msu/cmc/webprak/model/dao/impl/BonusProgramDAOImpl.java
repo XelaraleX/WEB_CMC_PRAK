@@ -35,14 +35,25 @@ public class BonusProgramDAOImpl extends BaseDAOImpl<BonusProgram> implements Bo
             String pattern = "%" + filter.getBonusCard() + "%";
             predicates.add(builder.like(root.get("bonusCard"), pattern));
         }
-        if (filter.getCntKm() != null) {
-            Integer cntKm = filter.getCntKm();
-            predicates.add(builder.ge(root.get("cntKm"), builder.literal(cntKm)));
+        if (filter.getCntKmMin() != null) {
+            Integer cntKmMin = filter.getCntKmMin();
+            predicates.add(builder.le(builder.literal(cntKmMin), root.get("cntKm")));
         }
-        if (filter.getCntUseKm() != null) {
-            Integer cntUseKm = filter.getCntUseKm();
-            predicates.add(builder.ge(root.get("cntUseKm"), builder.literal(cntUseKm)));
+        if (filter.getCntKmMax() != null) {
+            Integer cntKmMax = filter.getCntKmMax();
+            predicates.add(builder.ge(builder.literal(cntKmMax), root.get("cntKm")));
         }
+        if (filter.getCntUseKmMin() != null) {
+            Integer cntUseKmMin = filter.getCntUseKmMin();
+            predicates.add(builder.le(builder.literal(cntUseKmMin), root.get("cntUseKm")));
+        }
+        if (filter.getCntUseKmMax() != null) {
+            Integer cntUseKmMax = filter.getCntUseKmMax();
+            predicates.add(builder.ge(builder.literal(cntUseKmMax), root.get("cntUseKm")));
+        }
+
+        if (predicates.size() != 0)
+            criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
         List<BonusProgram> result = session.createQuery(criteriaQuery).getResultList();
         session.getTransaction().commit();

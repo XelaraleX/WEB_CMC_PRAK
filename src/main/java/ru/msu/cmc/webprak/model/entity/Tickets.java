@@ -27,6 +27,7 @@ public class Tickets {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "flight_id", nullable = false)
+    @ToString.Exclude
     private Flights flightId;
 
     @Lob
@@ -36,6 +37,7 @@ public class Tickets {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
     private Users userId;
 
     @Override

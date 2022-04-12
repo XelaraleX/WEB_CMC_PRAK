@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.msu.cmc.webprak.model.dao.*;
 import ru.msu.cmc.webprak.model.entity.*;
+import ru.msu.cmc.webprak.utils.TimeConvertUtil;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -39,9 +40,7 @@ public class TicketsDAOTest {
 
         this.airports1 = new Airports();
         this.airports1.setAirportName("TestName1" + this.runId);
-        this.airports1.setWidth(0.1);
-        this.airports1.setLongitude(1.1);
-        this.airports1.setTimezone("TestTimezone1" + this.runId);
+        this.airports1.setAirportTown("TestTown1" + this.runId);
 
         this.aircraft1 = new Aircraft();
         this.aircraft1.setModelName("TestName1" + this.runId);
@@ -51,11 +50,11 @@ public class TicketsDAOTest {
         this.flights1.setAirportIdDep(airports1);
         this.flights1.setAirportIdArr(airports1);
         this.flights1.setAircraftId(aircraft1);
-        this.flights1.setTimeDep("2022-04-12 00:01:01+03");
-        this.flights1.setTimeArr("2022-04-12 00:02:01+03");
-        this.flights1.setFlightCost(1);
-        this.flights1.setCntSeats(1);
-        this.flights1.setCntAvailableSeats(1);
+        this.flights1.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:01"));
+        this.flights1.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:01"));
+        this.flights1.setFlightCost(11);
+        this.flights1.setCntSeats(11);
+        this.flights1.setCntAvailableSeats(11);
 
         this.users1 = new Users();
         this.users1.setUserStatus("TestStatus1" + this.runId);
@@ -79,9 +78,7 @@ public class TicketsDAOTest {
 
         this.airports2 = new Airports();
         this.airports2.setAirportName("TestName2" + this.runId);
-        this.airports2.setWidth(0.2);
-        this.airports2.setLongitude(1.2);
-        this.airports2.setTimezone("TestTimezone2" + this.runId);
+        this.airports2.setAirportTown("TestTown2" + this.runId);
 
         this.aircraft2 = new Aircraft();
         this.aircraft2.setModelName("TestName2" + this.runId);
@@ -91,11 +88,11 @@ public class TicketsDAOTest {
         this.flights2.setAirportIdDep(airports2);
         this.flights2.setAirportIdArr(airports2);
         this.flights2.setAircraftId(aircraft2);
-        this.flights2.setTimeDep("2022-04-12 00:01:02+03");
-        this.flights2.setTimeArr("2022-04-12 00:02:02+03");
-        this.flights2.setFlightCost(2);
-        this.flights2.setCntSeats(2);
-        this.flights2.setCntAvailableSeats(2);
+        this.flights2.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:02"));
+        this.flights2.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:02"));
+        this.flights2.setFlightCost(12);
+        this.flights2.setCntSeats(12);
+        this.flights2.setCntAvailableSeats(12);
 
         this.users2 = new Users();
         this.users2.setUserStatus("TestStatus2" + this.runId);

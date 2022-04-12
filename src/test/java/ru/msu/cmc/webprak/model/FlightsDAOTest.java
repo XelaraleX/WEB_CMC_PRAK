@@ -11,8 +11,10 @@ import ru.msu.cmc.webprak.model.entity.Aircraft;
 import ru.msu.cmc.webprak.model.entity.Airlines;
 import ru.msu.cmc.webprak.model.entity.Airports;
 import ru.msu.cmc.webprak.model.entity.Flights;
+import ru.msu.cmc.webprak.utils.TimeConvertUtil;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,6 +35,7 @@ public class FlightsDAOTest {
     public void setUp() {
         this.dao = DAOFactory.getInstance().getFlightsDAO();
         this.runId = UUID.randomUUID().toString();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd' 'HH:mm:ss");
 
         this.airlines1 = new Airlines();
         this.airlines1.setAirlineName("TestName1" + this.runId);
@@ -41,9 +44,7 @@ public class FlightsDAOTest {
 
         this.airports1 = new Airports();
         this.airports1.setAirportName("TestName1" + this.runId);
-        this.airports1.setWidth(0.1);
-        this.airports1.setLongitude(1.1);
-        this.airports1.setTimezone("TestTimezone1" + this.runId);
+        this.airports1.setAirportTown("TestTown1" + this.runId);
 
         this.aircraft1 = new Aircraft();
         this.aircraft1.setModelName("TestName1" + this.runId);
@@ -53,11 +54,11 @@ public class FlightsDAOTest {
         this.flights1.setAirportIdDep(airports1);
         this.flights1.setAirportIdArr(airports1);
         this.flights1.setAircraftId(aircraft1);
-        this.flights1.setTimeDep("2022-04-12 00:01:01+03");
-        this.flights1.setTimeArr("2022-04-12 00:02:01+03");
-        this.flights1.setFlightCost(1);
-        this.flights1.setCntSeats(1);
-        this.flights1.setCntAvailableSeats(1);
+        this.flights1.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:01"));
+        this.flights1.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:01"));
+        this.flights1.setFlightCost(11);
+        this.flights1.setCntSeats(11);
+        this.flights1.setCntAvailableSeats(11);
 
 
         this.airlines2 = new Airlines();
@@ -67,9 +68,7 @@ public class FlightsDAOTest {
 
         this.airports2 = new Airports();
         this.airports2.setAirportName("TestName2" + this.runId);
-        this.airports2.setWidth(0.2);
-        this.airports2.setLongitude(1.2);
-        this.airports2.setTimezone("TestTimezone2" + this.runId);
+        this.airports2.setAirportTown("TestTown2" + this.runId);
 
         this.aircraft2 = new Aircraft();
         this.aircraft2.setModelName("TestName2" + this.runId);
@@ -79,32 +78,32 @@ public class FlightsDAOTest {
         this.flights2.setAirportIdDep(airports2);
         this.flights2.setAirportIdArr(airports2);
         this.flights2.setAircraftId(aircraft2);
-        this.flights2.setTimeDep("2022-04-12 00:01:02+03");
-        this.flights2.setTimeArr("2022-04-12 00:02:02+03");
-        this.flights2.setFlightCost(2);
-        this.flights2.setCntSeats(2);
-        this.flights2.setCntAvailableSeats(2);
+        this.flights2.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:02"));
+        this.flights2.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:02"));
+        this.flights2.setFlightCost(12);
+        this.flights2.setCntSeats(12);
+        this.flights2.setCntAvailableSeats(12);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
-        airlinesDAO.add(airlines1);
-        airlinesDAO.add(airlines2);
+        airlinesDAO.add(this.airlines1);
+        airlinesDAO.add(this.airlines2);
 
         AirportsDAO airportsDAO = DAOFactory.getInstance().getAirportsDAO();
-        airportsDAO.add(airports1);
-        airportsDAO.add(airports2);
+        airportsDAO.add(this.airports1);
+        airportsDAO.add(this.airports2);
 
         AircraftDAO aircraftDAO = DAOFactory.getInstance().getAircraftDAO();
-        aircraftDAO.add(aircraft1);
-        aircraftDAO.add(aircraft2);
+        aircraftDAO.add(this.aircraft1);
+        aircraftDAO.add(this.aircraft2);
 
-        this.dao.add(flights1);
-        this.dao.add(flights2);
+        this.dao.add(this.flights1);
+        this.dao.add(this.flights2);
     }
 
     @AfterEach
     public void cleanUp() {
-        this.dao.delete(flights1);
-        this.dao.delete(flights2);
+        this.dao.delete(this.flights1);
+        this.dao.delete(this.flights2);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
         airlinesDAO.delete(this.airlines1);
@@ -134,7 +133,7 @@ public class FlightsDAOTest {
     public void testGetByTimeDep() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeDep("2022-04-12 00:01:02+03")
+                        .timeDepMin("2022-04-12 00:00:00")
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -147,7 +146,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeDep("2022-04-12 00:01:01+03")
+                        .timeDepMax("2022-04-12 00:02:00")
                         .build()
         );
 
@@ -163,7 +162,7 @@ public class FlightsDAOTest {
     public void testGetByTimeArr() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeArr("2022-04-12 00:02:02+03")
+                        .timeArrMin("2022-04-12 00:00:00")
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -176,7 +175,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .timeArr("2022-04-12 00:02:01+03")
+                        .timeArrMax("2022-04-12 00:03:00")
                         .build()
         );
 
@@ -192,7 +191,7 @@ public class FlightsDAOTest {
     public void testGetByFlightCost() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .flightCost(2)
+                        .flightCostMin(10)
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -205,7 +204,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .flightCost(1)
+                        .flightCostMax(11)
                         .build()
         );
 
@@ -221,7 +220,7 @@ public class FlightsDAOTest {
     public void testGetByCntSeats() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .cntSeats(2)
+                        .cntSeatsMin(10)
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -234,7 +233,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .cntSeats(1)
+                        .cntSeatsMax(11)
                         .build()
         );
 
@@ -250,7 +249,7 @@ public class FlightsDAOTest {
     public void testGetByCntAvailableSeats() {
         Collection<Flights> all = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .cntAvailableSeats(2)
+                        .cntAvailableSeatsMin(10)
                         .build()
         );
         Set<Flights> expected = new HashSet<>();
@@ -263,7 +262,7 @@ public class FlightsDAOTest {
 
         Collection<Flights> onlyTest1 = this.dao.getFlightsByFilter(
                 FlightsDAO.getFilterBuilder()
-                        .cntAvailableSeats(1)
+                        .cntAvailableSeatsMax(11)
                         .build()
         );
 

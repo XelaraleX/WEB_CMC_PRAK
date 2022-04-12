@@ -52,13 +52,16 @@ public class UsersDAOImpl extends BaseDAOImpl<Users> implements UsersDAO {
             predicates.add(builder.like(root.get("phoneNumber"), pattern));
         }
         if (filter.getUserLogin() != null) {
-            String pattern = "%" + filter.getUserLogin() + "%";
-            predicates.add(builder.like(root.get("userLogin"), pattern));
+            String log = "%" + filter.getUserLogin() + "%";
+            predicates.add(builder.like(root.get("userLogin"), log));
         }
         if (filter.getUserPassword() != null) {
-            String pattern = "%" + filter.getUserPassword() + "%";
-            predicates.add(builder.like(root.get("userPassword"), pattern));
+            String pswd = "%" + filter.getUserPassword() + "%";
+            predicates.add(builder.like(root.get("userPassword"), pswd));
         }
+
+        if (predicates.size() != 0)
+            criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
         List<Users> result = session.createQuery(criteriaQuery).getResultList();
         session.getTransaction().commit();

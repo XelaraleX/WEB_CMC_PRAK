@@ -36,6 +36,9 @@ public class TicketsDAOImpl extends BaseDAOImpl<Tickets> implements TicketsDAO {
             predicates.add(builder.like(root.get("status"), pattern));
         }
 
+        if (predicates.size() != 0)
+            criteriaQuery.where(predicates.toArray(new Predicate[0]));
+
         List<Tickets> result = session.createQuery(criteriaQuery).getResultList();
         session.getTransaction().commit();
         return result;

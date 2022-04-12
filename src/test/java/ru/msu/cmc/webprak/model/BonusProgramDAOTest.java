@@ -39,15 +39,15 @@ public class BonusProgramDAOTest {
         this.users1.setAddress("TestAddress1" + this.runId);
         this.users1.setEmail("test1" + this.runId + "@mail.com");
         this.users1.setPhoneNumber("+1" + this.runId);
-        this.users1.setUserLogin("TestLogin1" + this.runId);
-        this.users1.setUserPassword("TestPassword1" + this.runId);
+        this.users1.setUserLogin("TestLogin1");
+        this.users1.setUserPassword("TestPassword1");
 
         this.bonusProgram1 = new BonusProgram();
         this.bonusProgram1.setUserId(users1);
         this.bonusProgram1.setAirlineId(airlines1);
         this.bonusProgram1.setBonusCard("bc1" + this.runId);
-        this.bonusProgram1.setCntKm(1);
-        this.bonusProgram1.setCntUseKm(1);
+        this.bonusProgram1.setCntKm(11);
+        this.bonusProgram1.setCntUseKm(11);
 
 
         this.airlines2 = new Airlines();
@@ -61,32 +61,32 @@ public class BonusProgramDAOTest {
         this.users2.setAddress("TestAddress2" + this.runId);
         this.users2.setEmail("test2" + this.runId + "@mail.com");
         this.users2.setPhoneNumber("+2" + this.runId);
-        this.users2.setUserLogin("TestLogin2" + this.runId);
-        this.users2.setUserPassword("TestPassword2" + this.runId);
+        this.users2.setUserLogin("TestLogin2");
+        this.users2.setUserPassword("TestPassword2");
 
         this.bonusProgram2 = new BonusProgram();
         this.bonusProgram2.setUserId(users2);
         this.bonusProgram2.setAirlineId(airlines2);
         this.bonusProgram2.setBonusCard("bc2" + this.runId);
-        this.bonusProgram2.setCntKm(2);
-        this.bonusProgram2.setCntUseKm(2);
+        this.bonusProgram2.setCntKm(12);
+        this.bonusProgram2.setCntUseKm(12);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
-        airlinesDAO.add(airlines1);
-        airlinesDAO.add(airlines2);
+        airlinesDAO.add(this.airlines1);
+        airlinesDAO.add(this.airlines2);
 
         UsersDAO usersDAO = DAOFactory.getInstance().getUsersDAO();
-        usersDAO.add(users1);
-        usersDAO.add(users2);
+        usersDAO.add(this.users1);
+        usersDAO.add(this.users2);
 
-        this.dao.add(bonusProgram1);
-        this.dao.add(bonusProgram2);
+        this.dao.add(this.bonusProgram1);
+        this.dao.add(this.bonusProgram2);
     }
 
     @AfterEach
     public void cleanUp() {
-        this.dao.delete(bonusProgram1);
-        this.dao.delete(bonusProgram2);
+        this.dao.delete(this.bonusProgram1);
+        this.dao.delete(this.bonusProgram2);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
         airlinesDAO.delete(this.airlines1);
@@ -139,7 +139,7 @@ public class BonusProgramDAOTest {
     public void testGetByCntKm() {
         Collection<BonusProgram> all = this.dao.getBonusProgramByFilter(
                 BonusProgramDAO.getFilterBuilder()
-                        .cntKm(2)
+                        .cntKmMin(10)
                         .build()
         );
         Set<BonusProgram> expected = new HashSet<>();
@@ -152,7 +152,7 @@ public class BonusProgramDAOTest {
 
         Collection<BonusProgram> onlyTest1 = this.dao.getBonusProgramByFilter(
                 BonusProgramDAO.getFilterBuilder()
-                        .cntKm(1)
+                        .cntKmMax(11)
                         .build()
         );
 
@@ -168,7 +168,7 @@ public class BonusProgramDAOTest {
     public void testGetByCntUseKm() {
         Collection<BonusProgram> all = this.dao.getBonusProgramByFilter(
                 BonusProgramDAO.getFilterBuilder()
-                        .cntUseKm(2)
+                        .cntUseKmMin(10)
                         .build()
         );
         Set<BonusProgram> expected = new HashSet<>();
@@ -181,7 +181,7 @@ public class BonusProgramDAOTest {
 
         Collection<BonusProgram> onlyTest1 = this.dao.getBonusProgramByFilter(
                 BonusProgramDAO.getFilterBuilder()
-                        .cntUseKm(1)
+                        .cntUseKmMax(11)
                         .build()
         );
 
