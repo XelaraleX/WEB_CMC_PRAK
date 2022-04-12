@@ -30,7 +30,6 @@ public class Airlines {
     @Type(type = "org.hibernate.type.TextType")
     private String airlineName;
 
-    @Lob
     @Column(name = "airline_email")
     @Type(type = "org.hibernate.type.TextType")
     private String airlineEmail;
@@ -45,11 +44,11 @@ public class Airlines {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Airlines airlines = (Airlines) o;
-        return Objects.equals(getId(), airlines.getId()) && Objects.equals(airlineName, airlines.airlineName) && Objects.equals(airlineEmail, airlines.airlineEmail) && Objects.equals(phoneNumber, airlines.phoneNumber);
+        return Objects.equals(id, airlines.id) && Objects.equals(airlineName, airlines.airlineName) && Objects.equals(airlineEmail, airlines.airlineEmail) && Objects.equals(phoneNumber, airlines.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), airlineName, airlineEmail, phoneNumber);
+        return Objects.hash(id, airlineName, airlineEmail, phoneNumber);
     }
 }

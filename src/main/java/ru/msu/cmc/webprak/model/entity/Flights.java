@@ -29,24 +29,20 @@ public class Flights {
             updatable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
-    @ToString.Exclude
     private Airlines airlineId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airport_id_dep", nullable = false)
-    @ToString.Exclude
     private Airports airportIdDep;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "airport_id_arr", nullable = false)
-    @ToString.Exclude
     private Airports airportIdArr;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "aircraft_id", nullable = false)
-    @ToString.Exclude
     private Aircraft aircraftId;
 
     @Lob

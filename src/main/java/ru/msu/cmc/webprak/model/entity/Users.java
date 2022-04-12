@@ -35,7 +35,6 @@ public class Users {
     @Type(type = "org.hibernate.type.TextType")
     private String fullName;
 
-    @Lob
     @Column(name = "address")
     @Type(type = "org.hibernate.type.TextType")
     private String address;

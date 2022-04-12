@@ -25,9 +25,8 @@ public class Tickets {
             updatable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "flight_id", nullable = false)
-    @ToString.Exclude
     private Flights flightId;
 
     @Lob
@@ -35,7 +34,7 @@ public class Tickets {
     @Type(type = "org.hibernate.type.TextType")
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private Users userId;
 
