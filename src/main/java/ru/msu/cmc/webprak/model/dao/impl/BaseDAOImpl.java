@@ -2,7 +2,7 @@ package ru.msu.cmc.webprak.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cmc.webprak.model.HibernateDatabaseConfig;
+import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.BaseDAO;
 
 import javax.transaction.Transactional;
@@ -17,7 +17,7 @@ public class BaseDAOImpl<SomeEntity> implements BaseDAO<SomeEntity> {
 
     @Override
     public void add(SomeEntity entity) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().openSession();
+        Session session = HibernateConfiguration.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(entity);
         session.getTransaction().commit();
@@ -26,7 +26,7 @@ public class BaseDAOImpl<SomeEntity> implements BaseDAO<SomeEntity> {
 
     @Override
     public void update(SomeEntity entity) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().openSession();
+        Session session = HibernateConfiguration.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(entity);
         session.getTransaction().commit();
@@ -35,7 +35,7 @@ public class BaseDAOImpl<SomeEntity> implements BaseDAO<SomeEntity> {
 
     @Override
     public void delete(SomeEntity entity) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().openSession();
+        Session session = HibernateConfiguration.getSessionFactory().openSession();
         session.beginTransaction();
         session.delete(entity);
         session.getTransaction().commit();
@@ -44,7 +44,7 @@ public class BaseDAOImpl<SomeEntity> implements BaseDAO<SomeEntity> {
 
     @Override
     public SomeEntity getById(Integer id) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().openSession();
+        Session session = HibernateConfiguration.getSessionFactory().openSession();
         session.beginTransaction();
         SomeEntity result = session.load(this.entityClass, id);
         session.getTransaction().commit();

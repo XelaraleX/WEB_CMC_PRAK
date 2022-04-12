@@ -2,7 +2,7 @@ package ru.msu.cmc.webprak.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cmc.webprak.model.HibernateDatabaseConfig;
+import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.BonusProgramDAO;
 import ru.msu.cmc.webprak.model.entity.BonusProgram;
 
@@ -24,7 +24,7 @@ public class BonusProgramDAOImpl extends BaseDAOImpl<BonusProgram> implements Bo
 
     @Override
     public Collection<BonusProgram> getBonusProgramByFilter(Filter filter) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().getCurrentSession();
+        Session session = HibernateConfiguration.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<BonusProgram> criteriaQuery = builder.createQuery(BonusProgram.class);

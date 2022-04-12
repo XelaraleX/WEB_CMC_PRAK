@@ -1,21 +1,28 @@
 package ru.msu.cmc.webprak.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Entity
 @Table(name = "bonusprogram")
 @Getter
 @Setter
 @ToString
+@Transactional
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class BonusProgram {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bonus_id", nullable = false)
+    @Column(name = "bonus_id",
+            columnDefinition = "serial",
+            insertable = false,
+            updatable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -28,6 +35,7 @@ public class BonusProgram {
 
     @Lob
     @Column(name = "bonus_card", nullable = false)
+    @Type(type = "org.hibernate.type.TextType")
     private String bonusCard;
 
     @Lob
@@ -37,4 +45,17 @@ public class BonusProgram {
     @Lob
     @Column(name = "cnt_use_km", nullable = false)
     private Integer cntUseKm;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BonusProgram that = (BonusProgram) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(userId, that.userId) && Objects.equals(airlineId, that.airlineId) && Objects.equals(bonusCard, that.bonusCard) && Objects.equals(cntKm, that.cntKm) && Objects.equals(cntUseKm, that.cntUseKm);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), userId, airlineId, bonusCard, cntKm, cntUseKm);
+    }
 }

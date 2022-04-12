@@ -2,7 +2,7 @@ package ru.msu.cmc.webprak.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cmc.webprak.model.HibernateDatabaseConfig;
+import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.TicketsDAO;
 import ru.msu.cmc.webprak.model.entity.Tickets;
 
@@ -24,7 +24,7 @@ public class TicketsDAOImpl extends BaseDAOImpl<Tickets> implements TicketsDAO {
 
     @Override
     public Collection<Tickets> getTicketsByFilter(Filter filter) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().getCurrentSession();
+        Session session = HibernateConfiguration.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Tickets> criteriaQuery = builder.createQuery(Tickets.class);

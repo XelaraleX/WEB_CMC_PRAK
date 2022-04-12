@@ -2,7 +2,7 @@ package ru.msu.cmc.webprak.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cmc.webprak.model.HibernateDatabaseConfig;
+import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.AircraftDAO;
 import ru.msu.cmc.webprak.model.entity.Aircraft;
 
@@ -24,7 +24,7 @@ public class AircraftDAOImpl extends BaseDAOImpl<Aircraft> implements AircraftDA
 
     @Override
     public Collection<Aircraft> getAircraftByFilter(Filter filter) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().getCurrentSession();
+        Session session = HibernateConfiguration.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Aircraft> criteriaQuery = builder.createQuery(Aircraft.class);

@@ -2,7 +2,7 @@ package ru.msu.cmc.webprak.model.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import ru.msu.cmc.webprak.model.HibernateDatabaseConfig;
+import ru.msu.cmc.webprak.model.HibernateConfiguration;
 import ru.msu.cmc.webprak.model.dao.UsersDAO;
 import ru.msu.cmc.webprak.model.entity.Users;
 
@@ -24,7 +24,7 @@ public class UsersDAOImpl extends BaseDAOImpl<Users> implements UsersDAO {
 
     @Override
     public Collection<Users> getUsersByFilter(Filter filter) throws HibernateException {
-        Session session = HibernateDatabaseConfig.getSessionFactory().getCurrentSession();
+        Session session = HibernateConfiguration.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Users> criteriaQuery = builder.createQuery(Users.class);
