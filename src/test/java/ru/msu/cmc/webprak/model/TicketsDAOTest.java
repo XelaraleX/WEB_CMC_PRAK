@@ -50,8 +50,8 @@ public class TicketsDAOTest {
         this.flights1.setAirportIdDep(airports1);
         this.flights1.setAirportIdArr(airports1);
         this.flights1.setAircraftId(aircraft1);
-        this.flights1.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:01"));
-        this.flights1.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:01"));
+        this.flights1.setTimeDep(TimeConvertUtil.fromString("2022-04-12T00:01"));
+        this.flights1.setTimeArr(TimeConvertUtil.fromString("2022-04-12T00:02"));
         this.flights1.setFlightCost(11);
         this.flights1.setCntSeats(11);
         this.flights1.setCntAvailableSeats(11);
@@ -88,8 +88,8 @@ public class TicketsDAOTest {
         this.flights2.setAirportIdDep(airports2);
         this.flights2.setAirportIdArr(airports2);
         this.flights2.setAircraftId(aircraft2);
-        this.flights2.setTimeDep(TimeConvertUtil.fromString("2022-04-12 00:01:02"));
-        this.flights2.setTimeArr(TimeConvertUtil.fromString("2022-04-12 00:02:02"));
+        this.flights2.setTimeDep(TimeConvertUtil.fromString("2022-04-12T00:11"));
+        this.flights2.setTimeArr(TimeConvertUtil.fromString("2022-04-12T00:12"));
         this.flights2.setFlightCost(12);
         this.flights2.setCntSeats(12);
         this.flights2.setCntAvailableSeats(12);
@@ -103,39 +103,47 @@ public class TicketsDAOTest {
         this.users2.setUserLogin("TestLogin2" + this.runId);
         this.users2.setUserPassword("TestPassword2" + this.runId);
 
-        this.tickets1 = new Tickets();
-        this.tickets1.setFlightId(flights2);
-        this.tickets1.setUserId(users2);
-        this.tickets1.setStatus("TestStatus2" + this.runId);
+        this.tickets2 = new Tickets();
+        this.tickets2.setFlightId(flights2);
+        this.tickets2.setUserId(users2);
+        this.tickets2.setStatus("TestStatus2" + this.runId);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
-        airlinesDAO.add(airlines1);
-        airlinesDAO.add(airlines2);
+        airlinesDAO.add(this.airlines1);
+        airlinesDAO.add(this.airlines2);
 
         AirportsDAO airportsDAO = DAOFactory.getInstance().getAirportsDAO();
-        airportsDAO.add(airports1);
-        airportsDAO.add(airports2);
+        airportsDAO.add(this.airports1);
+        airportsDAO.add(this.airports2);
 
         AircraftDAO aircraftDAO = DAOFactory.getInstance().getAircraftDAO();
-        aircraftDAO.add(aircraft1);
-        aircraftDAO.add(aircraft2);
+        aircraftDAO.add(this.aircraft1);
+        aircraftDAO.add(this.aircraft2);
 
         FlightsDAO flightsDAO = DAOFactory.getInstance().getFlightsDAO();
-        flightsDAO.add(flights1);
-        flightsDAO.add(flights2);
+        flightsDAO.add(this.flights1);
+        flightsDAO.add(this.flights2);
 
         UsersDAO usersDAO = DAOFactory.getInstance().getUsersDAO();
-        usersDAO.add(users1);
-        usersDAO.add(users2);
+        usersDAO.add(this.users1);
+        usersDAO.add(this.users2);
 
-        this.dao.add(tickets1);
-        this.dao.add(tickets2);
+        this.dao.add(this.tickets1);
+        this.dao.add(this.tickets2);
     }
 
     @AfterEach
     public void cleanUp() {
-        this.dao.delete(tickets1);
-        this.dao.delete(tickets2);
+        this.dao.delete(this.tickets1);
+        this.dao.delete(this.tickets2);
+
+        FlightsDAO flightsDAO = DAOFactory.getInstance().getFlightsDAO();
+        flightsDAO.delete(this.flights1);
+        flightsDAO.delete(this.flights2);
+
+        UsersDAO usersDAO = DAOFactory.getInstance().getUsersDAO();
+        usersDAO.delete(this.users1);
+        usersDAO.delete(this.users2);
 
         AirlinesDAO airlinesDAO = DAOFactory.getInstance().getAirlinesDAO();
         airlinesDAO.delete(this.airlines1);
@@ -148,14 +156,6 @@ public class TicketsDAOTest {
         AircraftDAO aircraftDAO = DAOFactory.getInstance().getAircraftDAO();
         aircraftDAO.delete(this.aircraft1);
         aircraftDAO.delete(this.aircraft2);
-
-        FlightsDAO flightsDAO = DAOFactory.getInstance().getFlightsDAO();
-        flightsDAO.delete(this.flights1);
-        flightsDAO.delete(this.flights2);
-
-        UsersDAO usersDAO = DAOFactory.getInstance().getUsersDAO();
-        usersDAO.delete(this.users1);
-        usersDAO.delete(this.users2);
 
         this.dao = null;
         this.runId = null;

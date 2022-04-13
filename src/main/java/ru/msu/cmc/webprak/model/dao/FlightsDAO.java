@@ -11,10 +11,10 @@ public interface FlightsDAO extends BaseDAO<Flights> {
     @Builder
     @Getter
     class Filter {
-        private String timeDepMin;
-        private String timeDepMax;
-        private String timeArrMin;
-        private String timeArrMax;
+        private LocalDateTime timeDepMin;
+        private LocalDateTime timeDepMax;
+        private LocalDateTime timeArrMin;
+        private LocalDateTime timeArrMax;
         private Integer flightCostMin;
         private Integer flightCostMax;
         private Integer cntSeatsMin;

@@ -34,20 +34,16 @@ public class FlightsDAOImpl extends BaseDAOImpl<Flights> implements FlightsDAO {
         List<Predicate> predicates = new ArrayList<>();
 
         if (filter.getTimeDepMin() != null) {
-            String str = filter.getTimeDepMin();
-            predicates.add(builder.lessThan(root.get("timeDep"), TimeConvertUtil.fromString(str)));
+            predicates.add(builder.greaterThan(root.get("timeDep"), filter.getTimeDepMin()));
         }
         if (filter.getTimeDepMax() != null) {
-            String str = filter.getTimeDepMax();
-            predicates.add(builder.greaterThan(root.get("timeDep"), TimeConvertUtil.fromString(str)));
+            predicates.add(builder.lessThan(root.get("timeDep"), filter.getTimeDepMax()));
         }
         if (filter.getTimeArrMin() != null) {
-            String str = filter.getTimeArrMin();
-            predicates.add(builder.lessThan(root.get("timeArr"), TimeConvertUtil.fromString(str)));
+            predicates.add(builder.greaterThan(root.get("timeArr"), filter.getTimeArrMin()));
         }
         if (filter.getTimeArrMax() != null) {
-            String str = filter.getTimeArrMax();
-            predicates.add(builder.greaterThan(root.get("timeArr"), TimeConvertUtil.fromString(str)));
+            predicates.add(builder.lessThan(root.get("timeArr"), filter.getTimeArrMax()));
         }
         if (filter.getFlightCostMin() != null) {
             Integer flightCostMin = filter.getFlightCostMin();

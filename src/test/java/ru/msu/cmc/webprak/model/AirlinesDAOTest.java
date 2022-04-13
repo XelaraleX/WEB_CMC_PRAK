@@ -30,8 +30,8 @@ public class AirlinesDAOTest {
         this.airlinesTest2.setAirlineEmail("test2" + this.runId + "@mail.com");
         this.airlinesTest2.setPhoneNumber("+2" + this.runId);
 
-        this.dao.add(airlinesTest1);
-        this.dao.add(airlinesTest2);
+        this.dao.add(this.airlinesTest1);
+        this.dao.add(this.airlinesTest2);
     }
 
     @AfterEach

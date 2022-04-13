@@ -215,7 +215,7 @@ public class UsersDAOTest {
 
         Collection<Users> onlyTest1 = this.dao.getUsersByFilter(
                 UsersDAO.getFilterBuilder()
-                        .userLogin("TestLogin1")
+                        .userLogin("TestLogin1" + this.runId)
                         .build()
         );
 
@@ -244,7 +244,7 @@ public class UsersDAOTest {
 
         Collection<Users> onlyTest1 = this.dao.getUsersByFilter(
                 UsersDAO.getFilterBuilder()
-                        .userPassword("TestPassword1")
+                        .userPassword("TestPassword1" + this.runId)
                         .build()
         );
 

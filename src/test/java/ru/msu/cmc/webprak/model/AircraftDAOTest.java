@@ -26,8 +26,8 @@ public class AircraftDAOTest {
         this.aircraftTest2 = new Aircraft();
         this.aircraftTest2.setModelName("TestName2" + this.runId);
 
-        this.dao.add(aircraftTest1);
-        this.dao.add(aircraftTest2);
+        this.dao.add(this.aircraftTest1);
+        this.dao.add(this.aircraftTest2);
     }
 
     @AfterEach

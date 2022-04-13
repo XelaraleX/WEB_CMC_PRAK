@@ -28,8 +28,8 @@ public class AirportsDAOTest {
         this.airportsTest2.setAirportName("TestName2" + this.runId);
         this.airportsTest2.setAirportTown("TestTown2" + this.runId);
 
-        this.dao.add(airportsTest1);
-        this.dao.add(airportsTest2);
+        this.dao.add(this.airportsTest1);
+        this.dao.add(this.airportsTest2);
     }
 
     @AfterEach

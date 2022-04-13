@@ -49,11 +49,9 @@ public class Flights {
     @ToString.Exclude
     private Aircraft aircraftId;
 
-    @Lob
     @Column(name = "time_dep", nullable = false)
     private LocalDateTime timeDep;
 
-    @Lob
     @Column(name = "time_arr", nullable = false)
     private LocalDateTime timeArr;
 
