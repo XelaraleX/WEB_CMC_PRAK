@@ -35,6 +35,10 @@ public class TicketsDAOImpl extends BaseDAOImpl<Tickets> implements TicketsDAO {
             String pattern = "%" + filter.getStatus() + "%";
             predicates.add(builder.like(root.get("status"), pattern));
         }
+        if (filter.getUserId() != null) {
+            Integer userid = filter.getUserId();
+            predicates.add(builder.equal(root.get("userId"), userid));
+        }
 
         if (predicates.size() != 0)
             criteriaQuery.where(predicates.toArray(new Predicate[0]));
